@@ -1,19 +1,28 @@
-print(" Bem Vindo ao aplicativo Racha-Conta")
+import json
 
-valor_total = float(input("Digite o Valor total da conta R$: "))
+def calcular_rachaconta():
+
+    print(" Bem Vindo ao aplicativo Racha-Conta")
+
+    valor_total = float(input("Digite o Valor total da conta R$: "))
+    pessoas = int(input("Digite quantas pessoas estão na mesa: "))
+
+    with open ("config.json", "r", encoding="utf-8") as arquivo:
+        config = json.load(arquivo)
+
+    pgarcom = config["g_percentual"]
 
 
-pessoas = int(input("Digite quantas pessoas estão na mesa: "))
+    gorjeta = valor_total * pgarcom
+    print(f"10% do garçom R$: {gorjeta:.2F}")
+    total_real = gorjeta + valor_total
+    dividido = valor_total / pessoas
+    
 
-porcentagem = 10
+    
+    print(f"Valor Total da conta: {total_real:.2f}")
+    print (f"Cada pessoa deve pagar R$: {dividido:.2f}")
 
-pgarcom = valor_total * 0.10
-print(f"10% do garçom: {pgarcom}")
 
-total_real = pgarcom + valor_total
-print(f"Valor Total da conta: {total_real}")
-
-novo_total = total_real / pessoas
-
-novo_total= int(novo_total)
-print (f"Cada pessoa deve pagar R$: {novo_total:.2f}")
+if __name__ == "__main__":
+    calcular_rachaconta()  
